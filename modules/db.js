@@ -3,7 +3,11 @@ const { Pool } = pg;
 import dotenv from "dotenv";
 dotenv.config();
 
-const pool = new Pool({
+let pool
+
+try  {
+
+pool = new Pool({
     user:     process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host:     process.env.HOST,   
@@ -81,6 +85,14 @@ pool.query(
     }
   }
 );
+
+}
+
+catch (err) {
+
+    console.log(err.stack);
+
+}
 
 // ************************************
 // FUNCTIONS
